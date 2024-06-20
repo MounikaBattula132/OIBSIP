@@ -1,1 +1,85 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .converter {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="converter">
+    <h1>Temperature Converter</h1>
+    <input type="number" id="temperatureInput" placeholder="Enter temperature">
+    <select id="unitInput">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <div class="result" id="resultDisplay"></div>
+</div>
+
+<script>
+    function convertTemperature() {
+        // Get input values
+        var tempValue = document.getElementById('temperatureInput').value;
+        var unit = document.getElementById('unitInput').value;
+
+        // Validate input
+        if (isNaN(tempValue) || tempValue === '') {
+            document.getElementById('resultDisplay').innerText = 'Please enter a valid number.';
+            return;
+        }
+
+        tempValue = parseFloat(tempValue);
+        var convertedValue;
+        var resultText;
+
+        // Perform conversion based on selected unit
+        if (unit === 'C') {
+            // Convert Celsius to Fahrenheit
+            convertedValue = (tempValue * 9/5) + 32;
+            resultText = `${tempValue}°C is ${convertedValue.toFixed(2)}°F`;
+        } else if (unit === 'F') {
+            // Convert Fahrenheit to Celsius
+            convertedValue = (tempValue - 32) * 5/9;
+            resultText = `${tempValue}°F is ${convertedValue.toFixed(2)}°C`;
+        } else {
+            resultText = 'Please select a valid unit.';
+        }
+
+        // Display the result
+        document.getElementById('resultDisplay').innerText = resultText;
+    }
+</script>
+
+</body>
+</html>
